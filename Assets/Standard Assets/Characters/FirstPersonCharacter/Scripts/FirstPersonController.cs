@@ -61,6 +61,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
+            if (Time.timeScale == 0f)
+            {
+                m_MouseLook.XSensitivity = 0;
+                m_MouseLook.YSensitivity = 0;
+            }
+            else
+            {
+                m_MouseLook.XSensitivity = 2;
+                m_MouseLook.YSensitivity = 2;
+            }
             RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
