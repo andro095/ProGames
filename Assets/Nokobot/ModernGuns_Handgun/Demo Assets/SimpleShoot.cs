@@ -10,7 +10,10 @@ public class SimpleShoot : MonoBehaviour
     public GameObject muzzleFlashPrefab;
     public Transform barrelLocation;
     public Transform casingExitLocation;
-
+    public int contador = 13;
+    public AudioSource audio;
+    public AudioClip ad1;
+    public AudioClip ad2;
 
     public float shotPower = 100f;
 
@@ -22,9 +25,18 @@ public class SimpleShoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1")&& contador>0)
         {
+            contador--;
             GetComponent<Animator>().SetTrigger("Fire");
+            audio.clip = ad1;
+            audio.Play();
+        }
+        if (Input.GetKeyDown(KeyCode.R) && contador<13)
+        {
+            contador = 13;
+            audio.clip = ad2;
+            audio.Play();
         }
     }
 

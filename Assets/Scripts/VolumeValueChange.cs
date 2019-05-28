@@ -4,7 +4,7 @@ public class VolumeValueChange : MonoBehaviour {
 
     private AudioSource audioSrc;
 
-    private float musicVolume = 1f;
+    private float musicVolume = 0.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +15,7 @@ public class VolumeValueChange : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        audioSrc.volume = musicVolume;
+        audioSrc.volume = musicVolume*0.5f;
 	}
 
     public void SetVolume(float vol)

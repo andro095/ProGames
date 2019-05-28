@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GunScript : MonoBehaviour
 {
@@ -11,14 +12,13 @@ public class GunScript : MonoBehaviour
     public Camera FpsCam;
     public ParticleSystem muzzleflash;
     public GameObject ImpactEffect;
-    public Text Contador;
-    public Text Contador2;
-    public Text Ammo;
-    public Text Ganar1;
-    public Text Ganar2;
-    public Text Ganar3;
-    public Text Reload;
-    public Text GanarAbs;
+    public TextMeshProUGUI Contador;
+    public TextMeshProUGUI Contador2;
+    public TextMeshProUGUI Ammo;
+    public TextMeshProUGUI Ganar1;
+    public TextMeshProUGUI Ganar2;
+    public TextMeshProUGUI Ganar3;
+    public TextMeshProUGUI GanarAbs;
     private int contador;
     private int contador2;
     private int contadorammo = 13;
@@ -33,7 +33,6 @@ public class GunScript : MonoBehaviour
         Ganar1.text = "";
         Ganar2.text = "";
         Ganar3.text = "";
-        Reload.text = "";
         GanarAbs.text = "";
         approved1 = false;
         approved2 = false;
@@ -42,18 +41,17 @@ public class GunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && contadorammo>0)
         {
             Disparar();
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && contadorammo<13)
         {
             Recargar();
-            Reload.text = "";
         }
         if(approved1 && approved2)
         {
-            GanarAbs.text = "YOU WIN!!!";
+            GanarAbs.text = "Ganaste el juego";
         }
     }
     void Disparar()
@@ -108,30 +106,26 @@ public class GunScript : MonoBehaviour
     void setContador()
     {
         //Modificar contador
-        Contador.text = "Targets: " + contador.ToString();
+        Contador.text = "Targets destruidos: " + contador.ToString();
         //Si el jugador colecciona 8 monedas, desplegar mensaje de ganar
         if (contador == 15)
         {
-            Ganar1.text = "APPROVED";
+            Ganar1.text = "Aprobado!";
         }
     }
 
     void setContador2()
     {
-        Contador2.text = "Enemies killed: " + contador2.ToString();
+        Contador2.text = "Enemigos abatidos: " + contador2.ToString();
         if(contador2 == 30)
         {
-            Ganar2.text = "APPROVED";
+            Ganar2.text = "Aprobado!";
         }
     }
 
     void setAmmo()
     {
-        Ammo.text = "Ammo: " + contadorammo.ToString();
-        if(contadorammo == 0)
-        {
-            Reload.text = "Press R to Reload ";
-        }
+        Ammo.text = "Munición: " + contadorammo.ToString();
     }
 
 
@@ -141,7 +135,7 @@ public class GunScript : MonoBehaviour
         if (other.gameObject.CompareTag("Checkpoint"))
         {
             //Desactivar moneda y aumentar contador
-            Ganar3.text = "APPROVED";
+            Ganar3.text = "Aprobado!";
         }
     }
 
